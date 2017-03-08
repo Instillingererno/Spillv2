@@ -1,0 +1,185 @@
+﻿body{
+    font-family: sans-serif;
+    color: white;
+    margin: 0;
+    display: block;
+    overflow: hidden;
+  }
+::-webkit-scrollbar{
+    background-color: rgb(10,20,0);
+}
+  #diescreen{
+    display: none;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    background-color: rgb(255,0,0);
+    background-color: rgba(255,0,0,0.7);
+    font-size: 50px;
+  }
+  #gamescreen-wrapper{
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background-color: rgb(0,0,0);
+  }
+  #quest {
+    text-align: center;
+    position: fixed;
+    width: 220px;
+    height: 300px;
+    left: 0;
+    top: 0;
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.7);
+  }
+  #que-content-wrapper{
+    position: fixed;
+    margin: 0 10px;
+    width: 200px;
+    height: 225px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  #que-1, #que-2, #que-3, #que-4, #que-5, #que-6, #que-7, #que-8{
+    width: 190px;
+    padding: 10px 5px;
+    margin: 0;
+    text-align: left;
+    font-size: 15px;
+    color: rgb(255,0,0);
+  }
+  #que-1:hover, #que-2:hover, #que-3:hover, #que-4:hover, #que-5:hover, #que-6:hover, #que-7:hover, #que-8:hover{
+      background-color: rgb(10,10,10);
+  }
+  #inventory{
+    text-align: center;
+    position: fixed;
+    width: 245px;
+    height: 370px;
+    bottom: 9%;
+    right: 0;
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.7);
+  }
+  #inv-content-wrapper{
+    position: fixed;
+    bottom: 9%;
+    right: 0;
+    height: 305px;
+    width: 235px;
+    margin: 5px;
+  }
+  .invSpot{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    margin: 4px;
+    background-color: rgb(60,60,60);
+  }
+  .invSpot:hover{
+    background-color: rgb(10,10,10);
+  }
+  #map{
+    position: fixed;
+    text-align: center;
+    width: 230px;
+    height: 170px;
+    top: 0;
+    right: 0;
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.7);
+    border: rgb(120,255,255) solid 2px;
+  }
+  #toolbar{
+    position: fixed;
+    width: 515px;
+    height: 60px;
+    bottom: 0;
+    right: 0;
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.8);
+  }
+  .toolbar-icon, #inventory-icon, #quest-icon{
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+  }
+  .toolbar-icon:hover{
+    background-color: rgb(0,0,0);
+  }
+  #dialogue{
+    position: fixed;
+    width: 450px;
+    height: 140px;
+    bottom: 0;
+    left: 34%;
+    text-align: center;
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.4);
+  }
+  #stats{
+    position: fixed;
+    width: 450px;
+    height: 140px;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.7);
+  }
+  #health-wrapper{
+    display: inline-block;
+  }
+  #healthbar{
+    position: fixed;
+    height: 40px;
+    width: 110px;
+    margin: 5px -50px;
+  }
+  #healthbar::-webkit-meter-bar{
+    border: solid rgb(0,0,0) 3px;
+  }
+  #healthbar::-webkit-meter-optimum-value{
+    background-color: rgb(255,0,0);
+  }
+  #level-wrapper{
+    display: inline-block;
+  }
+  progress {
+  background-color: rgb(255,255,255);
+  border: 0;
+  height: 18px;
+  border-radius: 9px;
+}
+  #Hit, #Kill, #respawn, #Level{
+    font-size: 25px;
+    margin: 300px 5px 0;
+    border: none;
+    height: 40px;
+    width: 180px;
+  }
+  #Hit:hover, #Kill:hover, #respawn:hover, #Level:hover{
+    background-color: rgb(40,80,255);
+  }
+#inv-txt, #que-txt{
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 0;
+    width: 210px;
+    height: 35px;
+    font-size: 26px;
+    text-align: center;
+    border-bottom: solid brown 2px;
+}

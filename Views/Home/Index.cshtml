@@ -1,1 +1,63 @@
-<div id="box1"></div>
+<div id="diescreen">
+    <p>You died!</p>
+    <input id="respawn" type="button" value="Respawn" onclick="btnRespawn()" />
+</div>
+
+<div id="gamescreen-wrapper">
+    <input type="button" id="Hit" value="Hit yourself" onclick="btnHit()" />
+    <input type="button" id="Kill" value="Kill yourself" onclick="btnKill()" />
+    <input type="button" id="Level" value="Gain a level" onclick="levelUp()" />
+</div>
+
+<div id="quest">
+    <p id="que-txt">Quests</p>
+    <div id="que-content-wrapper">
+        <!----><p id="que-1">HOLD</p>
+        <!----><p id="que-2">HOLD</p>
+        <!----><p id="que-3">HOLD</p>
+        <!----><p id="que-4">HOLD</p>
+        <!----><p id="que-5">HOLD</p>
+        <!----><p id="que-6">HOLD</p>
+        <!----><p id="que-7">HOLD</p>
+        <!----><p id="que-8">HOLD</p>
+        <!---->
+    </div>
+</div>
+
+<div id="map">MAP <br> SOLID OBJECT</div>
+
+<div id="inventory">
+    <p id="inv-txt">Inventory</p>
+    <div id="inv-content-wrapper">
+        <!----><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div>
+        <!----><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div>
+        <!----><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div>
+        <!----><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div>
+        <!----><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div><div class="invSpot"></div>
+        <!---->
+    </div>
+</div>
+
+<div id="stats">
+    <div id="health-wrapper">
+        <p id="health-txt">Health</p>
+        <meter value="100" min="0" optimum="50" max="100" title="HP" id="healthbar"></meter>
+    </div>
+    <div id="level-wrapper">
+        <p id="level-txt"></p>
+        <progress id="playerlevel" value="100" max="100"></progress>
+    </div>
+</div>
+
+<div id="dialogue"><p>DIALOGUE <br> INFORMATION OBJECT (POP-UP)</p></div>
+
+<div id="toolbar">
+    <div class="toolbar-icon" id="inventory-icon" onclick="inventory_icon()">INV</div>
+    <div class="toolbar-icon" id="quest-icon" onclick="quest_icon()">QUEST</div>
+    <div class="toolbar-icon" id="holder">HOLD</div>
+    <div class="toolbar-icon" id="holder">HOLD</div>
+    <div class="toolbar-icon" id="holder">HOLD</div>
+    <div class="toolbar-icon" id="holder">HOLD</div>
+    <div class="toolbar-icon" id="holder">HOLD</div>
+    <div class="toolbar-icon" id="holder">HOLD</div>
+</div>
