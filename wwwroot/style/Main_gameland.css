@@ -135,8 +135,8 @@
   }
   #stats{
     position: fixed;
-    width: 450px;
-    height: 140px;
+    width: 440px;
+    height: 130px;
     bottom: 0;
     left: 0;
     text-align: center;
@@ -154,9 +154,6 @@
   }
   #healthbar::-webkit-meter-bar{
     border: solid rgb(0,0,0) 3px;
-  }
-  #healthbar::-webkit-meter-optimum-value{
-    background-color: rgb(255,0,0);
   }
   #level-wrapper{
     display: inline-block;
