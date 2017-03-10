@@ -75,3 +75,8 @@ function quest_icon() {
         queOpen = false;
     }
 }
+window.onkeyup = function (event) {
+    if (event.keyCode === 81) {
+        quest_icon();
+    }
+};
