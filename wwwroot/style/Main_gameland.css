@@ -33,6 +33,7 @@
     background-color: rgb(0,0,0);
   }
   #quest {
+      display:inline-block;
     text-align: center;
     position: fixed;
     width: 220px;
@@ -41,6 +42,7 @@
     top: 0;
     background-color: rgb(51,51,51);
     background-color: rgba(51,51,51,0.7);
+    transition: ease 0.5s;
   }
   #que-content-wrapper{
     position: fixed;

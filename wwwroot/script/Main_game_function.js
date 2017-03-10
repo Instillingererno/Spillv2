@@ -59,24 +59,22 @@ function inventory_icon() {
         invOpen = false;
     }
 }
-window.onkeyup = function (event) {
-    if (event.keyCode === 69) {
-        inventory_icon();
-    }
-};
 /*Opening and closing quests*/
 function quest_icon() {
     if (!queOpen) {
-        document.getElementById("quest").style.display = "inline-block";
+        document.getElementById("quest").style.top = "0px";
         queOpen = true;
     }
     else {
-        document.getElementById("quest").style.display = "none";
+        document.getElementById("quest").style.top = "-300px";
         queOpen = false;
     }
 }
 window.onkeyup = function (event) {
+    if (event.keyCode === 69) {
+        inventory_icon();
+    }
     if (event.keyCode === 81) {
-        quest_icon();
+        quest_icon()
     }
 };
