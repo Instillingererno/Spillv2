@@ -59,9 +59,9 @@ function inventory_icon() {
         invOpen = false;
     }
 }
-window.onkeyup = function (x) {
-    if (x.keyCode === 69) {
-        inventory_icon;
+window.onkeyup = function (event) {
+    if (event.keyCode === 69) {
+        inventory_icon();
     }
 };
 /*Opening and closing quests*/

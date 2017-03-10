@@ -4,6 +4,7 @@
     margin: 0;
     display: block;
     overflow: hidden;
+    user-select: none;
   }
 ::-webkit-scrollbar{
     background-color: rgb(10,20,0);
