@@ -2,6 +2,7 @@
 var playerLevel = 10;
 var invOpen = true;
 var queOpen = true;
+var menOpen = true;
 
 /*Setting player health equal to playerHealth value*/
 function body_onload() {
@@ -70,11 +71,27 @@ function quest_icon() {
         queOpen = false;
     }
 }
+/*Opening and closing the main menu*/
+function menu_icon() {
+    if (!menOpen) {
+        document.getElementById("main-menu").style.left = "0px";
+        menOpen = true;
+    }
+    else {
+        document.getElementById("main-menu").style.left = "-3000px";
+        menOpen = false;
+    }
+}
+
+
 window.onkeyup = function (event) {
     if (event.keyCode === 69) {
         inventory_icon();
     }
     if (event.keyCode === 81) {
         quest_icon()
+    }
+    if (event.keyCode === 77) {
+        menu_icon()
     }
 };
