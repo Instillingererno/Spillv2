@@ -103,7 +103,7 @@
   }
   #toolbar{
     position: fixed;
-    width: 450px;
+    width: 384px;
     height: 60px;
     bottom: 0;
     right: 0;
@@ -126,7 +126,9 @@
     width: 450px;
     height: 140px;
     bottom: 0;
-    left: 34%;
+    right:0;
+    left:0;
+    margin:auto;
     text-align: center;
     background-color: rgb(51,51,51);
     background-color: rgba(51,51,51,0.4);
