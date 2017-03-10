@@ -51,11 +51,11 @@ function btnRespawn() {
 /*Opening and closing iventory*/
 function inventory_icon() {
     if (!invOpen) {
-        document.getElementById("inventory").style.display = "inline-block";
+        document.getElementById("inventory").style.right = "0px";
         invOpen = true;
     }
     else {
-        document.getElementById("inventory").style.display = "none";
+        document.getElementById("inventory").style.right = "-245px";
         invOpen = false;
     }
 }
