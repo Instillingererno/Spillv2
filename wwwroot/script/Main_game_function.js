@@ -1,6 +1,6 @@
 ﻿var playerHealth = 100;
 var playerLevel = 1;
-var playerXp = document.getElementById("playerxp").value;
+var playerXp;
 var invOpen = true;
 var queOpen = true;
 var menOpen = false;
@@ -97,15 +97,15 @@ function menu_icon() {
     }
 }
 
-
+/*Checks for keypresses*/
 window.onkeyup = function (event) {
     if (event.keyCode === 69) {
         inventory_icon();
     }
     if (event.keyCode === 81) {
-        quest_icon()
+        quest_icon();
     }
     if (event.keyCode === 77) {
-        menu_icon()
+        menu_icon();
     }
 };
