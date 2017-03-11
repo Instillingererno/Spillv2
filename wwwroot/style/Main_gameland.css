@@ -6,9 +6,6 @@
     overflow: hidden;
     user-select: none;
   }
-::-webkit-scrollbar{
-    background-color: rgb(10,20,0);
-}
   #diescreen{
     display: none;
     text-align: center;
@@ -20,6 +17,19 @@
     z-index: 10;
     background-color: rgb(255,0,0);
     background-color: rgba(255,0,0,0.7);
+    font-size: 50px;
+  }
+  #pausescreen{
+    display: none;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.8);
     font-size: 50px;
   }
   #gamescreen-wrapper{
@@ -63,6 +73,9 @@
   #que-1:hover, #que-2:hover, #que-3:hover, #que-4:hover, #que-5:hover, #que-6:hover, #que-7:hover, #que-8:hover{
       background-color: rgb(10,10,10);
   }
+  ::-webkit-scrollbar{
+    background-color: rgb(100,20,0);
+}
   #inventory{
     display:inline-block;
     text-align: center;
@@ -112,7 +125,7 @@
     background-color: rgb(51,51,51);
     background-color: rgba(51,51,51,0.8);
   }
-  .toolbar-icon, #inventory-icon, #quest-icon, #menu-icon{
+  .toolbar-icon, #inventory-icon, #quest-icon{
     display: inline-block;
     text-align: center;
     font-size: 12px;
@@ -138,16 +151,17 @@
   #main-menu{
     display:inline-block;
     text-align: center;
+    z-index:4;
     position: fixed;
     width: 250px;
     height: 350px;
     left:0;
     right:0;
-    top:0;
+    top:-1500px;
     bottom:0;
     margin:auto;
     background-color: rgb(51,51,51);
-    transition: ease 0.8s;
+    transition: ease 0.4s;
   }
   #stats{
     position: fixed;
@@ -161,6 +175,8 @@
   }
   #health-wrapper{
     display: inline-block;
+    position:fixed;
+    left:50px;
   }
   #healthbar{
     position: fixed;
@@ -173,12 +189,17 @@
   }
   #level-wrapper{
     display: inline-block;
+    position:fixed;
+    left:auto;
   }
   progress {
   background-color: rgb(255,255,255);
-  border: 0;
+  border: solid rgb(0,0,0) 2px;
   height: 18px;
-  border-radius: 9px;
+  position:fixed;
+  width:440px;
+  bottom:0;
+  left:0;
 }
   #Hit, #Kill, #respawn, #Level{
     font-size: 25px;
@@ -190,7 +211,7 @@
   #Hit:hover, #Kill:hover, #respawn:hover, #Level:hover{
     background-color: rgb(40,80,255);
   }
-#inv-txt, #que-txt{
+#inv-txt, #que-txt, #level-txt{
     display: inline-block;
     margin: 5px;
     padding: 5px 0;

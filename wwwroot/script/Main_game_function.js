@@ -1,26 +1,26 @@
 ﻿var playerHealth = 100;
-var playerLevel = 10;
+var playerLevel = 1;
+var playerXp = document.getElementById("playerxp").value;
 var invOpen = true;
 var queOpen = true;
-var menOpen = true;
+var menOpen = false;
 
-/*Setting player health equal to playerHealth value*/
+/*Setting player health equal to playerHealth value and the appropriate level*/
 function body_onload() {
     document.getElementById("healthbar").value = playerHealth;
-    document.getElementById("playerlevel").value = playerLevel;
     document.getElementById("level-txt").innerHTML += "Level: " + playerLevel;
 }
 
 /*Decrease player health*/
 function btnHit() {
-    playerHealth -= 5;
+    playerHealth -= 10;
     document.getElementById("healthbar").value = playerHealth;
     playerDeath();
 }
 
 /*Kill player*/
 function btnKill() {
-    playerHealth -= 100;
+    playerHealth = 0;
     document.getElementById("healthbar").value = playerHealth;
     playerDeath();
 }
@@ -73,12 +73,26 @@ function quest_icon() {
 }
 /*Opening and closing the main menu*/
 function menu_icon() {
+
+    function menDisplayNone() {
+        document.getElementById("pausescreen").style.display = "none";
+        document.getElementById("main-menu").style.display = "none";
+        document.getElementById("main-menu").style.top = "-1500px";
+    }
+    function menDisplayFull() {
+        document.getElementById("main-menu").style.top = "0px";
+    }
+
     if (!menOpen) {
-        document.getElementById("main-menu").style.left = "0px";
+        document.getElementById("main-menu").style.opacity = "1";
+        document.getElementById("main-menu").style.display = "inline-block";
+        document.getElementById("pausescreen").style.display = "inline-block";
+        setTimeout(menDisplayFull, 100);
         menOpen = true;
     }
     else {
-        document.getElementById("main-menu").style.left = "-3000px";
+        document.getElementById("main-menu").style.opacity = "0";
+        setTimeout(menDisplayNone, 400);
         menOpen = false;
     }
 }
