@@ -108,7 +108,7 @@ window.onkeyup = function (event) {
 /*WIP player xp*/
 function playerXP() {
     playerXp = document.getElementById("playerxp").value;
-    playerXp += 100;
+    playerXp += 300;
     document.getElementById("playerxp").value = playerXp;
     levelUp();
 }
@@ -118,7 +118,7 @@ function levelUp() {
     if (playerLevel >= 100) {
         return false;
     }
-    if (playerXp == 1000) {
+    if (playerXp >= 1000) {
         playerLevel++;
         document.getElementById("level-txt").innerHTML = "Level: " + playerLevel;
         playerXp -= 1000;
