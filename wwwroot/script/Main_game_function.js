@@ -10,6 +10,7 @@ function body_onload() {
     document.getElementById("healthbar").value = playerHealth;
     document.getElementById("level-txt").innerHTML = "Level: " + playerLevel;
     document.getElementById("playerxp").value = playerXp;
+    createGameArea();
 }
 
 /*Decrease player health*/
@@ -37,12 +38,15 @@ function btnRespawn() {
     document.getElementById("diescreen").style.display = "none";
     playerHealth = 100;
     document.getElementById("healthbar").value = playerHealth;
+    playerXp = 0;
+    document.getElementById("playerxp").value = playerXp;
+
 }
 
 /*Opening and closing iventory*/
 function inventory_icon() {
     if (!invOpen) {
-        document.getElementById("inventory").style.right = "0px";
+        document.getElementById("inventory").style.right = 0;
         invOpen = true;
     }
     else {
@@ -53,7 +57,7 @@ function inventory_icon() {
 /*Opening and closing quests*/
 function quest_icon() {
     if (!queOpen) {
-        document.getElementById("quest").style.top = "0px";
+        document.getElementById("quest").style.top = 0;
         queOpen = true;
     }
     else {
@@ -68,15 +72,17 @@ function menu_icon() {
         document.getElementById("pausescreen").style.display = "none";
         document.getElementById("main-menu").style.display = "none";
         document.getElementById("main-menu").style.top = "-1500px";
+        gameArea.start();
     }
     function menDisplayFull() {
-        document.getElementById("main-menu").style.top = "0px";
+        document.getElementById("main-menu").style.top = 0;
     }
 
     if (!menOpen) {
         document.getElementById("main-menu").style.opacity = "1";
         document.getElementById("main-menu").style.display = "inline-block";
         document.getElementById("pausescreen").style.display = "inline-block";
+        gameArea.stop();
         setTimeout(menDisplayFull, 100);
         menOpen = true;
     }
@@ -89,13 +95,13 @@ function menu_icon() {
 
 /*Checks for keypresses*/
 window.onkeyup = function (event) {
-    if (event.keyCode === 69) {
+    if (event.keyCode === 66) {
         inventory_icon();
     }
-    if (event.keyCode === 81) {
+    if (event.keyCode === 76) {
         quest_icon();
     }
-    if (event.keyCode === 77) {
+    if (event.keyCode === 27) {
         menu_icon();
     }
 };
@@ -124,4 +130,68 @@ function levelUp() {
         playerXp -= 1000;
         document.getElementById("playerxp").value = playerXp;
     }
+}
+
+
+
+
+
+/*WIP gamearea with object*/
+var playerChar;
+
+function createGameArea() {
+    gameArea.start();
+    playerChar = new player(30, 15, "red", 0, 0);
+}
+
+function player(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    this.speedX = 0;
+    this.speedY = 0;
+    this.update = function () {
+        ctx = gameArea.context;
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    };
+    this.newPos = function () {
+        this.x += this.speedX;
+        this.y += this.speedY;
+    };
+}
+
+var gameArea = {
+    canvas: document.createElement("canvas"),
+    start: function () {
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, 18);
+        window.addEventListener('keydown', function (e) {
+            gameArea.keys = gameArea.keys || [];
+            gameArea.keys[e.keyCode] = e.type === "keydown";
+        });
+        window.addEventListener('keyup', function (e) {
+            gameArea.keys[e.keyCode] = e.type === "keydown";
+        });
+    },
+    clear: function () {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+        clearInterval(this.interval);
+    }
+};
+
+function updateGameArea() {
+    gameArea.clear();
+    playerChar.speedX = 0;
+    playerChar.speedY = 0;
+    if (gameArea.keys && gameArea.keys[37]) { playerChar.speedX = -4; }
+    if (gameArea.keys && gameArea.keys[38]) { playerChar.speedY = -2; }
+    if (gameArea.keys && gameArea.keys[39]) { playerChar.speedX = 4; }
+    if (gameArea.keys && gameArea.keys[40]) { playerChar.speedY = 2; }
+    playerChar.newPos();
+    playerChar.update();
 }
