@@ -32,16 +32,6 @@
     background-color: rgba(0,0,0,0.8);
     font-size: 50px;
 }
-#gamescreen-wrapper {
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    background-color: rgb(0,0,0);
-}
 #quest {
     display: inline-block;
     text-align: center;
@@ -252,10 +242,6 @@ progress {
     border-bottom: solid brown 2px;
 }
 canvas {
-    width: 200px;
-    height:200px;
     position:fixed;
-    top:50px;
-    left:300px;
     background-color: rgb(90, 90, 90);
 }

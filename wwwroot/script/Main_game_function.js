@@ -1,6 +1,7 @@
 ﻿var playerHealth = 100;
 var playerLevel = 1;
 var playerXp = 500;
+var playerChar;
 var invOpen = true;
 var queOpen = true;
 var menOpen = false;
@@ -14,15 +15,8 @@ function body_onload() {
 }
 
 /*Decrease player health*/
-function btnHit() {
+function takePlayerDamage() {
     playerHealth -= 10;
-    document.getElementById("healthbar").value = playerHealth;
-    playerDeath();
-}
-
-/*Kill player*/
-function btnKill() {
-    playerHealth = 0;
     document.getElementById("healthbar").value = playerHealth;
     playerDeath();
 }
@@ -111,6 +105,8 @@ window.onkeyup = function (event) {
 
 
 
+
+
 /*WIP player xp*/
 function playerXP() {
     playerXp = document.getElementById("playerxp").value;
@@ -136,14 +132,15 @@ function levelUp() {
 
 
 
-/*WIP gamearea with object*/
-var playerChar;
 
+
+/*WIP gamearea with object*/
 function createGameArea() {
     gameArea.start();
-    playerChar = new player(30, 15, "red", 0, 0);
+    playerChar = new player(40, 40, "red", 800, 400);
 }
 
+/*Creates game object (player) and places it in gamearea*/
 function player(width, height, color, x, y) {
     this.width = width;
     this.height = height;
@@ -156,16 +153,39 @@ function player(width, height, color, x, y) {
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     };
+    /*Calculates the directional movement and updates position. Calls edge check*/
     this.newPos = function () {
         this.x += this.speedX;
         this.y += this.speedY;
+        this.hitEdges();
+    };
+    /*Edge of screen check*/
+    this.hitEdges = function () {
+        var top = gameArea.canvas.height - gameArea.canvas.height;
+        var bottom = gameArea.canvas.height - this.height;
+        var right = gameArea.canvas.width - this.width;
+        var left = gameArea.canvas.width - gameArea.canvas.width;
+        if (this.y < top) {
+            this.y = top;
+        }
+        if (this.y > bottom) {
+            this.y = bottom;
+        }
+        if (this.x > right) {
+            this.x = right;
+        }
+        if (this.x < left) {
+            this.x = left;
+        }
     };
 }
-
+/*The game area is created and started. (setting update frequency, eventlisteners for key input)*/
 var gameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
         this.context = this.canvas.getContext("2d");
+        this.canvas.height = window.innerHeight;
+        this.canvas.width = window.innerWidth;
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(updateGameArea, 18);
         window.addEventListener('keydown', function (e) {
@@ -176,22 +196,31 @@ var gameArea = {
             gameArea.keys[e.keyCode] = e.type === "keydown";
         });
     },
+    /*Necessary to call for clearing prior position after position update*/
     clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
+    /*Stopping the game when called*/
     stop : function() {
         clearInterval(this.interval);
     }
 };
-
+/*Clears area, updates position and moved object (player) to new position*/
 function updateGameArea() {
     gameArea.clear();
     playerChar.speedX = 0;
     playerChar.speedY = 0;
     if (gameArea.keys && gameArea.keys[37]) { playerChar.speedX = -4; }
-    if (gameArea.keys && gameArea.keys[38]) { playerChar.speedY = -2; }
+    if (gameArea.keys && gameArea.keys[65]) { playerChar.speedX = -4; }
+
+    if (gameArea.keys && gameArea.keys[38]) { playerChar.speedY = -4; }
+    if (gameArea.keys && gameArea.keys[87]) { playerChar.speedY = -4; }
+
     if (gameArea.keys && gameArea.keys[39]) { playerChar.speedX = 4; }
-    if (gameArea.keys && gameArea.keys[40]) { playerChar.speedY = 2; }
+    if (gameArea.keys && gameArea.keys[68]) { playerChar.speedX = 4; }
+
+    if (gameArea.keys && gameArea.keys[40]) { playerChar.speedY = 4; }
+    if (gameArea.keys && gameArea.keys[83]) { playerChar.speedY = 4; }
     playerChar.newPos();
     playerChar.update();
 }
