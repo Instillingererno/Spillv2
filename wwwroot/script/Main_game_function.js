@@ -7,6 +7,8 @@ var playerXpPerLevel = 10 * (4 * playerLevel ^ 0.5 + 0.02 * playerLevel ^ 2 + 0.
 var invOpen = true;
 var queOpen = true;
 var menOpen = false;
+var postnr = 0;
+var PlayerTab = [];
 
 /*Setting player health equal to playerHealth value and the appropriate level and xp*/
 function body_onload() {
@@ -15,6 +17,15 @@ function body_onload() {
     document.getElementById("playerxp").value = currentXp;
     document.getElementById("xpperlevel").innerHTML = "XP for next level: " + playerXpPerLevel;
     createGameArea();
+    PlayerTab[postnr].Navn = Navn;
+    PlayerTab[postnr].Health = playerHealth;
+    PlayerTab[postnr].XP = playerXp;
+    PlayerTab[postnr].Level = playerLevel;
+    if (typeof (Storage) !== "undefined") {
+        localStorage.setItem("PlayerFile", JSON.stringify(PlayerTab));
+    } else {
+        alert("The web browser you use do not suport saving of files. Please swich browser to be able to save the game")
+    }
 }
 
 /*Decrease player health*/
@@ -231,5 +242,4 @@ function updateGameArea() {
     if (gameArea.keys && gameArea.keys[83]) { playerChar.speedY = 4; }
     playerChar.newPos();
     playerChar.update();
-    enemyChar1.update();
 }
