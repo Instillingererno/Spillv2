@@ -3,6 +3,7 @@ var playerLevel = 70;
 var playerChar;
 var enemyChar1;
 var currentXp = 100;
+var playerName = "Shit";
 var playerXpPerLevel = 10 * (4 * playerLevel ^ 0.5 + 0.02 * playerLevel ^ 2 + 0.0001 * playerLevel ^ 3 + 1 - 0.15 * playerLevel);
 var invOpen = true;
 var queOpen = true;
@@ -17,9 +18,11 @@ function body_onload() {
     document.getElementById("playerxp").value = currentXp;
     document.getElementById("xpperlevel").innerHTML = "XP for next level: " + playerXpPerLevel;
     createGameArea();
-    PlayerTab[postnr].Navn = Navn;
+}
+function btnSaveGame_onclick() {
+    PlayerTab[postnr].Navn = playerName;
     PlayerTab[postnr].Health = playerHealth;
-    PlayerTab[postnr].XP = playerXp;
+    PlayerTab[postnr].XP = currentXp;
     PlayerTab[postnr].Level = playerLevel;
     if (typeof (Storage) !== "undefined") {
         localStorage.setItem("PlayerFile", JSON.stringify(PlayerTab));
@@ -27,7 +30,6 @@ function body_onload() {
         alert("The web browser you use do not suport saving of files. Please swich browser to be able to save the game")
     }
 }
-
 /*Decrease player health*/
 function takePlayerDamage() {
     playerHealth -= 10;
@@ -144,7 +146,7 @@ function levelUp() {
 function createGameArea() {
     gameArea.start();
     playerChar = new player(20, 20, "red", 400, 400);
-    enemyChar1 = new enemy1(20, 20, "green", 200, 400);
+    enemyChar1 = new enemy1(20, 20, "orange", 200, 400);
 }
 
 /*Creates game object (player) and places it in gamearea*/
@@ -242,4 +244,5 @@ function updateGameArea() {
     if (gameArea.keys && gameArea.keys[83]) { playerChar.speedY = 4; }
     playerChar.newPos();
     playerChar.update();
+    enemyChar1.update();
 }
