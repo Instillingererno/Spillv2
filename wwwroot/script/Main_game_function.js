@@ -1,7 +1,9 @@
 ﻿var playerHealth = 100;
-var playerLevel = 1;
-var playerXp = 500;
+var playerLevel = 70;
 var playerChar;
+var enemyChar1;
+var currentXp = 100;
+var playerXpPerLevel = 10 * (4 * playerLevel ^ 0.5 + 0.02 * playerLevel ^ 2 + 0.0001 * playerLevel ^ 3 + 1 - 0.15 * playerLevel);
 var invOpen = true;
 var queOpen = true;
 var menOpen = false;
@@ -10,7 +12,8 @@ var menOpen = false;
 function body_onload() {
     document.getElementById("healthbar").value = playerHealth;
     document.getElementById("level-txt").innerHTML = "Level: " + playerLevel;
-    document.getElementById("playerxp").value = playerXp;
+    document.getElementById("playerxp").value = currentXp;
+    document.getElementById("xpperlevel").innerHTML = "XP for next level: " + playerXpPerLevel;
     createGameArea();
 }
 
@@ -25,16 +28,18 @@ function takePlayerDamage() {
 function playerDeath() {
     if (playerHealth <= 0) {
         document.getElementById("diescreen").style.display = "inline-block";
+        gameArea.stop();
     }
 }
 
+/*Respawning*/
 function btnRespawn() {
     document.getElementById("diescreen").style.display = "none";
+    currentXp = 0;
     playerHealth = 100;
+    gameArea.start();
     document.getElementById("healthbar").value = playerHealth;
-    playerXp = 0;
-    document.getElementById("playerxp").value = playerXp;
-
+    document.getElementById("playerxp").value = currentXp;
 }
 
 /*Opening and closing iventory*/
@@ -106,28 +111,18 @@ window.onkeyup = function (event) {
 
 
 
-
-/*WIP player xp*/
-function playerXP() {
-    playerXp = document.getElementById("playerxp").value;
-    playerXp += 300;
-    document.getElementById("playerxp").value = playerXp;
-    levelUp();
-}
-
 /*WIP player level*/
 function levelUp() {
     if (playerLevel >= 100) {
         return false;
     }
-    if (playerXp >= 1000) {
+    if (currentXp >= playerXpPerLevel) {
         playerLevel++;
         document.getElementById("level-txt").innerHTML = "Level: " + playerLevel;
-        playerXp -= 1000;
-        document.getElementById("playerxp").value = playerXp;
+        currentXp -= playerXpPerLevel;
+        document.getElementById("playerxp").value = currentXp;
     }
 }
-
 
 
 
@@ -137,7 +132,8 @@ function levelUp() {
 /*WIP gamearea with object*/
 function createGameArea() {
     gameArea.start();
-    playerChar = new player(40, 40, "red", 800, 400);
+    playerChar = new player(20, 20, "red", 400, 400);
+    enemyChar1 = new enemy1(20, 20, "green", 200, 400);
 }
 
 /*Creates game object (player) and places it in gamearea*/
@@ -179,13 +175,25 @@ function player(width, height, color, x, y) {
         }
     };
 }
+/*Creates game object (enemy) and places it in gamearea*/
+function enemy1(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    this.update = function () {
+        ctx = gameArea.context;
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    };
+}
 /*The game area is created and started. (setting update frequency, eventlisteners for key input)*/
 var gameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
         this.context = this.canvas.getContext("2d");
-        this.canvas.height = window.innerHeight;
-        this.canvas.width = window.innerWidth;
+        this.canvas.height = 500;
+        this.canvas.width = 850;
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(updateGameArea, 18);
         window.addEventListener('keydown', function (e) {
@@ -196,11 +204,11 @@ var gameArea = {
             gameArea.keys[e.keyCode] = e.type === "keydown";
         });
     },
-    /*Necessary to call for clearing prior position after position update*/
+/*Necessary to call for clearing prior position after position update*/
     clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
-    /*Stopping the game when called*/
+/*Stopping the game when called*/
     stop : function() {
         clearInterval(this.interval);
     }
@@ -223,4 +231,5 @@ function updateGameArea() {
     if (gameArea.keys && gameArea.keys[83]) { playerChar.speedY = 4; }
     playerChar.newPos();
     playerChar.update();
+    enemyChar1.update();
 }

@@ -1,6 +1,7 @@
 ﻿body {
     font-family: sans-serif;
     color: white;
+    background-color: rgb(1,1,1);
     margin: 0;
     display: block;
     overflow: hidden;
@@ -243,5 +244,8 @@ progress {
 }
 canvas {
     position:fixed;
+    left:0;
+    right:0;
+    margin:auto;
     background-color: rgb(90, 90, 90);
 }
