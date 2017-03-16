@@ -24,10 +24,10 @@ function btnSaveGame_onclick() {
     PlayerTab[postnr].Health = playerHealth;
     PlayerTab[postnr].XP = currentXp;
     PlayerTab[postnr].Level = playerLevel;
-    if (typeof (Storage) !== "undefined") {
+    if (typeof Storage !== "undefined") {
         localStorage.setItem("PlayerFile", JSON.stringify(PlayerTab));
     } else {
-        alert("The web browser you use do not suport saving of files. Please swich browser to be able to save the game")
+        alert("The web browser you use do not suport saving of files. Please swich browser to be able to save the game");
     }
 }
 /*Decrease player health*/
