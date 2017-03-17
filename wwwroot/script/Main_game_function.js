@@ -29,11 +29,12 @@ function LoadGame() {
         for (var i = 0; i < tmpTab.length; i++) {
             PlayerTab.push(new Player(tmpTab[i].Name, tmpTab[i].Health, tmpTab[i].XP, tmpTab[i].Level));
         }
+        if(Player[0].Health)
+        playerHealth = PlayerTab[0].Health;
     } catch (e) {
         PlayerTab = [];
     }
-    if(Player[0].Health)
-        playerHealth = PlayerTab[0].Health;
+    
 }
 
 //Class for savegame
