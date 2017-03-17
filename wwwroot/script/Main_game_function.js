@@ -1,4 +1,4 @@
-﻿//Global variables
+//Global variables
 var playerHealth = 100;
 var playerLevel = 70;
 var playerChar;
@@ -22,15 +22,16 @@ function body_onload() {
     createGameArea();
 }
 function LoadGame() {
-            try {
-            var tmpTab = [];
-            tmpTab = JSON.parse(localStorage.getItem("PlayerFile"));
+    try {
+        var tmpTab = [];
+        tmpTab = JSON.parse(localStorage.getItem("PlayerFile"));
         for (var i = 0; i < tmpTab.length; i++) {
             PlayerTab.push(new Player(tmpTab[i].Name, tmpTab[i].Health, tmpTab[i].XP, tmpTab[i].Level));
         }
     } catch (e) {
         PlayerTab = [];
     }
+    playerHealth = PlayerTab[0].Health;
 }
 
 //Class for savegame
