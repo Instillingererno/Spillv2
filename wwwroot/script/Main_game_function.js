@@ -1,4 +1,4 @@
-//Global variables
+﻿//Global variables
 var playerHealth = 100;
 var playerLevel = 70;
 var playerChar;
@@ -21,6 +21,7 @@ function body_onload() {
     document.getElementById("xpperlevel").innerHTML = "XP for next level: " + playerXpPerLevel;
     createGameArea();
 }
+//function for loding game
 function LoadGame() {
     try {
         var tmpTab = [];
@@ -31,7 +32,8 @@ function LoadGame() {
     } catch (e) {
         PlayerTab = [];
     }
-    playerHealth = PlayerTab[0].Health;
+    if(Player[0].Health)
+        playerHealth = PlayerTab[0].Health;
 }
 
 //Class for savegame
@@ -53,6 +55,7 @@ function btnSaveGame_onclick() {
     } else {
         alert("The web browser you use do not suport saving of files. Please swich browser to be able to save the game");
     }
+    menDisplayNone();
 }
 
 //Decrease player health
