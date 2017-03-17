@@ -14,7 +14,7 @@ var PlayerTab = [];
 
 //Setting player health equal to playerHealth value and the appropriate level and xp
 function body_onload() {
-    saveLoadLogic();
+    /*saveLoadLogic();*/
     document.getElementById("healthbar").value = playerHealth;
     document.getElementById("level-txt").innerHTML = "Level: " + playerLevel;
     document.getElementById("playerxp").value = currentXp;
@@ -22,7 +22,7 @@ function body_onload() {
     createGameArea();
 }
 
-//Logic for saving and loading the playerstatus
+/*Logic for saving and loading the playerstatus
 function saveLoadLogic() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -38,7 +38,7 @@ function saveLoadLogic() {
     xhttp.open("GET", "Sporsmol.txt", false);
     xhttp.send();
     VisSporsmol(0)
-}
+}*/
 
 //Class for savegame
 var Player = function (Name, Health, XP, Level) {
@@ -46,7 +46,7 @@ var Player = function (Name, Health, XP, Level) {
     this.Health = Health;
     this.XP = XP;
     this.Level = Level;
-}
+};
 //Button from menu to save current game status
 function btnSaveGame_onclick() {
     PlayerTab[postnr].Name = playerName;
@@ -166,12 +166,12 @@ function levelUp() {
 //WIP gamearea with object
 function createGameArea() {
     gameArea.start();
-    playerChar = new player(20, 20, "red", 400, 400);
+    playerChar = new playerCharModel(20, 20, "red", 400, 400);
     enemyChar1 = new enemy1(20, 20, "orange", 200, 400);
 }
 
 //Creates game object (player) and places it in gamearea
-function player(width, height, color, x, y) {
+function playerCharModel(width, height, color, x, y) {
     this.width = width;
     this.height = height;
     this.x = x;
