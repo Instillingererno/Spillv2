@@ -56,7 +56,6 @@ function btnSaveGame_onclick() {
     } else {
         alert("The web browser you use do not suport saving of files. Please swich browser to be able to save the game");
     }
-    menDisplayNone();
 }
 
 //Decrease player health
