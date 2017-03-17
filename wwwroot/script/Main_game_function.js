@@ -21,15 +21,15 @@ function body_onload() {
     createGameArea();
 }
 //Class for savegame
-var Player = function (Navn, Health, XP, Level) {
-    this.Navn = Navn;
+var Player = function (Name, Health, XP, Level) {
+    this.Name = Name;
     this.Health = Health;
     this.XP = XP;
     this.Level = Level;
 }
 //Button from menu to save current game status
 function btnSaveGame_onclick() {
-    PlayerTab[postnr].Navn = playerName;
+    PlayerTab[postnr].Name = playerName;
     PlayerTab[postnr].Health = playerHealth;
     PlayerTab[postnr].XP = currentXp;
     PlayerTab[postnr].Level = playerLevel;
