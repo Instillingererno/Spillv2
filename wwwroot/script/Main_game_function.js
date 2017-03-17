@@ -31,7 +31,8 @@ function LoadGame() {
     } catch (e) {
         PlayerTab = [];
     }
-    playerHealth = PlayerTab[0].Health;
+    if(Player[0].Health)
+        playerHealth = PlayerTab[0].Health;
 }
 
 //Class for savegame
