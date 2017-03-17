@@ -1,4 +1,5 @@
-﻿var playerHealth = 100;
+﻿//Global variables
+var playerHealth = 100;
 var playerLevel = 70;
 var playerChar;
 var enemyChar1;
@@ -11,7 +12,7 @@ var menOpen = false;
 var postnr = 0;
 var PlayerTab = [];
 
-/*Setting player health equal to playerHealth value and the appropriate level and xp*/
+//Setting player health equal to playerHealth value and the appropriate level and xp
 function body_onload() {
     document.getElementById("healthbar").value = playerHealth;
     document.getElementById("level-txt").innerHTML = "Level: " + playerLevel;
@@ -19,6 +20,8 @@ function body_onload() {
     document.getElementById("xpperlevel").innerHTML = "XP for next level: " + playerXpPerLevel;
     createGameArea();
 }
+
+//Button from menu to save current game status
 function btnSaveGame_onclick() {
     PlayerTab[postnr].Navn = playerName;
     PlayerTab[postnr].Health = playerHealth;
@@ -30,14 +33,15 @@ function btnSaveGame_onclick() {
         alert("The web browser you use do not suport saving of files. Please swich browser to be able to save the game");
     }
 }
-/*Decrease player health*/
+
+//Decrease player health
 function takePlayerDamage() {
     playerHealth -= 10;
     document.getElementById("healthbar").value = playerHealth;
     playerDeath();
 }
 
-/*Check for player death*/
+//Check for player death
 function playerDeath() {
     if (playerHealth <= 0) {
         document.getElementById("diescreen").style.display = "inline-block";
@@ -45,7 +49,7 @@ function playerDeath() {
     }
 }
 
-/*Respawning*/
+//Respawning
 function btnRespawn() {
     document.getElementById("diescreen").style.display = "none";
     currentXp = 0;
@@ -55,7 +59,7 @@ function btnRespawn() {
     document.getElementById("playerxp").value = currentXp;
 }
 
-/*Opening and closing iventory*/
+//Opening and closing iventory
 function inventory_icon() {
     if (!invOpen) {
         document.getElementById("inventory").style.right = 0;
@@ -66,7 +70,8 @@ function inventory_icon() {
         invOpen = false;
     }
 }
-/*Opening and closing quests*/
+
+//Opening and closing quests
 function quest_icon() {
     if (!queOpen) {
         document.getElementById("quest").style.top = 0;
@@ -77,7 +82,8 @@ function quest_icon() {
         queOpen = false;
     }
 }
-/*Opening and closing the main menu*/
+
+//Opening and closing the main menu
 function menu_icon() {
 
     function menDisplayNone() {
@@ -105,7 +111,7 @@ function menu_icon() {
     }
 }
 
-/*Checks for keypresses*/
+//Checks for keypresses
 window.onkeyup = function (event) {
     if (event.keyCode === 66) {
         inventory_icon();
@@ -118,13 +124,7 @@ window.onkeyup = function (event) {
     }
 };
 
-
-
-
-
-
-
-/*WIP player level*/
+//WIP player level
 function levelUp() {
     if (playerLevel >= 100) {
         return false;
@@ -137,19 +137,14 @@ function levelUp() {
     }
 }
 
-
-
-
-
-
-/*WIP gamearea with object*/
+//WIP gamearea with object
 function createGameArea() {
     gameArea.start();
     playerChar = new player(20, 20, "red", 400, 400);
     enemyChar1 = new enemy1(20, 20, "orange", 200, 400);
 }
 
-/*Creates game object (player) and places it in gamearea*/
+//Creates game object (player) and places it in gamearea
 function player(width, height, color, x, y) {
     this.width = width;
     this.height = height;
@@ -162,13 +157,15 @@ function player(width, height, color, x, y) {
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     };
-    /*Calculates the directional movement and updates position. Calls edge check*/
+
+//Calculates the directional movement and updates position. Calls edge check
     this.newPos = function () {
         this.x += this.speedX;
         this.y += this.speedY;
         this.hitEdges();
     };
-    /*Edge of screen check*/
+
+//Edge of screen check
     this.hitEdges = function () {
         var top = gameArea.canvas.height - gameArea.canvas.height;
         var bottom = gameArea.canvas.height - this.height;
@@ -188,7 +185,8 @@ function player(width, height, color, x, y) {
         }
     };
 }
-/*Creates game object (enemy) and places it in gamearea*/
+
+//Creates game object (enemy) and places it in gamearea
 function enemy1(width, height, color, x, y) {
     this.width = width;
     this.height = height;
@@ -200,7 +198,8 @@ function enemy1(width, height, color, x, y) {
         ctx.fillRect(this.x, this.y, this.width, this.height);
     };
 }
-/*The game area is created and started. (setting update frequency, eventlisteners for key input)*/
+
+//The game area is created and started. (setting update frequency, eventlisteners for key input)
 var gameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
@@ -217,16 +216,19 @@ var gameArea = {
             gameArea.keys[e.keyCode] = e.type === "keydown";
         });
     },
-/*Necessary to call for clearing prior position after position update*/
+
+//Necessary to call for clearing prior position after position update
     clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
-/*Stopping the game when called*/
+
+//Stopping the game when called
     stop : function() {
         clearInterval(this.interval);
     }
 };
-/*Clears area, updates position and moved object (player) to new position*/
+
+//Clears area, updates position and moves object (player) to new position
 function updateGameArea() {
     gameArea.clear();
     playerChar.speedX = 0;
