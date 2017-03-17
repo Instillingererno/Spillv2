@@ -34,7 +34,6 @@ function LoadGame() {
     } catch (e) {
         PlayerTab = [];
     }
-
 }
 
 //Class for savegame
@@ -47,6 +46,7 @@ var Player = function (Name, Health, XP, Level) {
 
 //Button from menu to save current game status
 function btnSaveGame_onclick() {
+    menu_icon();
     PlayerTab[postnr].Name = playerName;
     PlayerTab[postnr].Health = playerHealth;
     PlayerTab[postnr].XP = currentXp;
