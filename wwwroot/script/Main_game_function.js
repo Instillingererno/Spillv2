@@ -20,7 +20,13 @@ function body_onload() {
     document.getElementById("xpperlevel").innerHTML = "XP for next level: " + playerXpPerLevel;
     createGameArea();
 }
-
+//Class for savegame
+var Player = function (Navn, Health, XP, Level) {
+    this.Navn = Navn;
+    this.Health = Health;
+    this.XP = XP;
+    this.Level = Level;
+}
 //Button from menu to save current game status
 function btnSaveGame_onclick() {
     PlayerTab[postnr].Navn = playerName;
