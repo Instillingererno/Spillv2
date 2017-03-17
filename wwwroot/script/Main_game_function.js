@@ -34,7 +34,7 @@ function LoadGame() {
     } catch (e) {
         PlayerTab = [];
     }
-    
+
 }
 
 //Class for savegame
