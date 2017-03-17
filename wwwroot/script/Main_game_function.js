@@ -1,16 +1,15 @@
-﻿//Global variables
+//Global variables
 var playerHealth = 100;
 var playerLevel = 70;
 var playerChar;
 var enemyChar1;
 var currentXp = 100;
-var playerName = "Shit";
 var playerXpPerLevel = 10 * (4 * playerLevel ^ 0.5 + 0.02 * playerLevel ^ 2 + 0.0001 * playerLevel ^ 3 + 1 - 0.15 * playerLevel);
 var invOpen = true;
 var queOpen = true;
 var menOpen = false;
 var postnr = 0;
-var PlayerTab = [];
+var PlayerTab;
 
 //Setting player health equal to playerHealth value and the appropriate level and xp
 function body_onload() {
@@ -21,42 +20,34 @@ function body_onload() {
     document.getElementById("xpperlevel").innerHTML = "XP for next level: " + playerXpPerLevel;
     createGameArea();
 }
-//function for loding game
+//function for loading game
 function LoadGame() {
     try {
-        var tmpTab = [];
-        tmpTab = JSON.parse(localStorage.getItem("PlayerFile"));
-        for (var i = 0; i < tmpTab.length; i++) {
-            PlayerTab.push(new Player(tmpTab[i].Name, tmpTab[i].Health, tmpTab[i].XP, tmpTab[i].Level));
-        }
-        if(Player[0].Health)
-        playerHealth = PlayerTab[0].Health;
+        PlayerTab = JSON.parse(localStorage.getItem("PlayerFile"));
+        if(PlayerTab.Health)
+            playerHealth = PlayerTab.Health;
     } catch (e) {
-        PlayerTab = [];
+        PlayerTab = { //Name, Health, XP, Level
+            Name: "Shit",
+            Health: 100,
+            XP: 0,
+            Level: 1
+        };
     }
     
 }
 
-//Class for savegame
-var Player = function (Name, Health, XP, Level) {
-    this.Name = Name;
-    this.Health = Health;
-    this.XP = XP;
-    this.Level = Level;
-};
-
 //Button from menu to save current game status
 function btnSaveGame_onclick() {
-    PlayerTab[postnr].Name = playerName;
-    PlayerTab[postnr].Health = playerHealth;
-    PlayerTab[postnr].XP = currentXp;
-    PlayerTab[postnr].Level = playerLevel;
+    menu_icon();
+    PlayerTab.Health = playerHealth;
+    PlayerTab.XP = currentXp;
+    PlayerTab.Level = playerLevel;
     if (typeof Storage !== "undefined") {
         localStorage.setItem("PlayerFile", JSON.stringify(PlayerTab));
     } else {
         alert("The web browser you use do not suport saving of files. Please swich browser to be able to save the game");
     }
-    menDisplayNone();
 }
 
 //Decrease player health
