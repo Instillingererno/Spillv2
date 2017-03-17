@@ -250,4 +250,5 @@ canvas {
     right:0;
     margin:auto;
     background-color: rgb(90, 90, 90);
+    background-image:url(/images/startAreaBg.jpg);
 }
