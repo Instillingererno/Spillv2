@@ -34,7 +34,6 @@ function LoadGame() {
             Level: 1
         };
     }
-    
 }
 
 //Button from menu to save current game status
