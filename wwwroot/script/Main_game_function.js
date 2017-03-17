@@ -1,5 +1,5 @@
-﻿//Global variables
-var playerHealth;
+//Global variables
+var playerHealth = 100;
 var playerLevel = 70;
 var playerChar;
 var enemyChar1;
@@ -31,6 +31,7 @@ function LoadGame() {
     } catch (e) {
         PlayerTab = [];
     }
+    playerHealth = PlayerTab[0].Health;
 }
 
 //Class for savegame
