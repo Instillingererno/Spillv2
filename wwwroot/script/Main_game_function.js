@@ -14,12 +14,32 @@ var PlayerTab = [];
 
 //Setting player health equal to playerHealth value and the appropriate level and xp
 function body_onload() {
+    saveLoadLogic();
     document.getElementById("healthbar").value = playerHealth;
     document.getElementById("level-txt").innerHTML = "Level: " + playerLevel;
     document.getElementById("playerxp").value = currentXp;
     document.getElementById("xpperlevel").innerHTML = "XP for next level: " + playerXpPerLevel;
     createGameArea();
 }
+
+//Logic for saving and loading the playerstatus
+function saveLoadLogic() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var tekst = xhttp.responseText;
+            var linje = tekst.split("\r\n");
+            for (var i = 0; i < linje.length; i++) {
+                var felt = linje[i].split(";");
+                SporsmolTab.push(new Sporsmol(felt[0], felt[1], felt[2], felt[3], felt[4], parseInt(felt[5]), 0, felt[6], felt[7]));
+            }
+        }
+    };
+    xhttp.open("GET", "Sporsmol.txt", false);
+    xhttp.send();
+    VisSporsmol(0)
+}
+
 //Class for savegame
 var Player = function (Name, Health, XP, Level) {
     this.Name = Name;
