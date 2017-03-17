@@ -31,13 +31,13 @@ function saveLoadLogic() {
             var linje = tekst.split("\r\n");
             for (var i = 0; i < linje.length; i++) {
                 var felt = linje[i].split(";");
-                SporsmolTab.push(new Sporsmol(felt[0], felt[1], felt[2], felt[3], felt[4], parseInt(felt[5]), 0, felt[6], felt[7]));
+                PlayerTab.push(new Player(felt[0], felt[1], felt[2], felt[3], felt[4], parseInt(felt[5]), 0, felt[6], felt[7]));
             }
         }
     };
     xhttp.open("GET", "Sporsmol.txt", false);
     xhttp.send();
-    VisSporsmol(0)
+    
 }
 
 //Class for savegame
